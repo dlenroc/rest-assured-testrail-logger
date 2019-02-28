@@ -9,9 +9,10 @@ import io.restassured.specification.FilterableResponseSpecification
 import org.junit.Test
 import java.io.File
 import java.lang.reflect.Method
+import java.util.Collections.synchronizedList
 
 class TestRailFilter : Filter {
-    private val requests = mutableListOf<Request>()
+    private val requests = synchronizedList(mutableListOf<Request>())
     private var name: String? = null
 
     class Request(val request: FilterableRequestSpecification, val response: io.restassured.response.Response)
