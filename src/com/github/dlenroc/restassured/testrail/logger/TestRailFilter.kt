@@ -17,6 +17,7 @@ class TestRailFilter : Filter {
 
     class Request(val request: FilterableRequestSpecification, val response: io.restassured.response.Response)
 
+    @Synchronized
     override fun filter(requestSpec: FilterableRequestSpecification, responseSpec: FilterableResponseSpecification, ctx: FilterContext): io.restassured.response.Response {
         val response = ctx.next(requestSpec, responseSpec)
         val method = getCurrentTestMethod()
@@ -102,6 +103,7 @@ class TestRailFilter : Filter {
         }
     }
 
+    @Synchronized
     fun save() {
         if (requests.isEmpty())
             return
