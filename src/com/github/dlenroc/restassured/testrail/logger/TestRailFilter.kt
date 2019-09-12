@@ -6,7 +6,6 @@ import io.restassured.internal.support.Prettifier
 import io.restassured.parsing.Parser.fromContentType
 import io.restassured.specification.FilterableRequestSpecification
 import io.restassured.specification.FilterableResponseSpecification
-import org.junit.Test
 import java.io.File
 import java.lang.reflect.Method
 import java.util.Collections.synchronizedList
@@ -99,7 +98,7 @@ class TestRailFilter : Filter {
                 null
             }
         }.firstOrNull {
-            it?.isAnnotationPresent(Test::class.java) ?: false
+            it?.annotations?.any { annotation -> annotation.annotationClass.simpleName!!.contains("Test") } ?: false
         }
     }
 
